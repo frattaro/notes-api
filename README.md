@@ -1,6 +1,8 @@
 # Notes API
 
-Navigate to the repo directory and run `gradlew build`
+Navigate to the repo directory and:
+- run `gradlew build` to build locally and run tests
+- run `gradlew bootRun` to run locally at http://localhost:8080/api/notes.
 
 ## Windows Users
 

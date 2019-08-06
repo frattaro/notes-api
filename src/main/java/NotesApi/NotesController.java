@@ -2,6 +2,7 @@ package NotesApi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +24,13 @@ public class NotesController {
 	private List<Note> notes = new ArrayList<>();
 
     @GetMapping
-    public List<Note> findAll() {
+    public List<Note> findAll(@RequestParam(value="query", required=false) String query) {
+    	if (query != null) {
+    		return this.notes.stream()
+				.filter(x -> x.getBody().contains(query))
+				.collect(Collectors.toList());
+    	}
+    	
         return this.notes;
     }
 

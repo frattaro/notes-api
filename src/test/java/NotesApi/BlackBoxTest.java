@@ -39,6 +39,9 @@ public class BlackBoxTest {
 
         NoteDto[] actualNotes = restTemplate.getForObject(RESOURCE_URL, NoteDto[].class);
         assertTrue(actualNotes.length > 0);
+
+        actualNotes = restTemplate.getForObject(RESOURCE_URL + "?query=doesNotExist", NoteDto[].class);
+        assertTrue(actualNotes.length == 0);
     }
      
     @Test
